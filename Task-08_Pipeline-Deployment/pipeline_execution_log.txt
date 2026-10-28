@@ -1,0 +1,71 @@
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout SCM)
+[Pipeline] echo
+Checking out source code from GitHub repository...
+[Pipeline] checkout
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-pipeline\.git # timeout=10
+Fetching changes from remote repository
+ > git.exe checkout -f 7c189b2
+Commit message: "Release: Merge develop into main for MVP Release v1.0"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build & Compile)
+[Pipeline] echo
+Compiling source code with Apache Maven...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "mvn clean compile && exit %%ERRORLEVEL%%"
+[INFO] Scanning for projects...
+[INFO] Building insurance-verification-portal 1.0.0
+[INFO] Compiling 4 source files to target/classes
+[INFO] BUILD SUCCESS
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Automated Tests)
+[Pipeline] echo
+Executing JUnit & Selenium test suite (Quality Gate)...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "mvn test && exit %%ERRORLEVEL%%"
+[INFO] Running com.insurancedoc.InsuranceVerificationTests
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.654 s
+[INFO] BUILD SUCCESS
+[Pipeline] junit
+Recording test results
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Package Artifact)
+[Pipeline] echo
+Packaging standalone Spring Boot executable JAR file...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "mvn package -DskipTests && exit %%ERRORLEVEL%%"
+[INFO] Building jar: target/insurance-verification-portal.jar
+[INFO] Replacing main artifact with repackaged fat jar
+[INFO] BUILD SUCCESS
+[Pipeline] archiveArtifacts
+Archiving artifacts: target/*.jar
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Application)
+[Pipeline] echo
+Deploying insurance-verification-portal to staging on port 8085...
+[Pipeline] echo
+Deployment successfully executed. Verified endpoint on http://localhost:8085
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+CI/CD Pipeline successfully executed for insurance-verification-pipeline Build #4!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

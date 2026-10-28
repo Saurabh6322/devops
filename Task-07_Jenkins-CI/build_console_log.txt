@@ -1,0 +1,72 @@
+Started by an SCM change
+Running as SYSTEM
+Building in workspace C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-ci
+The recommended git tool is: NONE
+using credential github-sourabhshelke-token
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-ci\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/sourabhshelke/insurance-document-verification-portal.git # timeout=10
+Fetching upstream changes from https://github.com/sourabhshelke/insurance-document-verification-portal.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.46.0.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/sourabhshelke/insurance-document-verification-portal.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 7c189b2 (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 7c189b2
+Commit message: "Release: Merge develop into main for MVP Release v1.0"
+[insurance-verification-ci] $ cmd.exe /C "mvn clean package && exit %%ERRORLEVEL%%"
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----< com.insurancedoc:insurance-verification-portal >-----
+[INFO] Building insurance-verification-portal 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ insurance-verification-portal ---
+[INFO] Deleting C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-ci\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ insurance-verification-portal ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources/static to target/classes/static
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ insurance-verification-portal ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug target 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ insurance-verification-portal ---
+[INFO] skip non existing resourceDirectory src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ insurance-verification-portal ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug target 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ insurance-verification-portal ---
+[INFO] Using auto detected provider: org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.insurancedoc.InsuranceVerificationTests
+2026-10-28T14:15:02.124+05:30  INFO 14208 --- [           main] c.i.InsuranceVerificationApplication     : Starting InsuranceVerificationApplication using Java 21...
+2026-10-28T14:15:04.421+05:30  INFO 14208 --- [           main] o.s.b.t.m.w.SpringBootMockMvcBuilder$    : MockMvc configured for test execution
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.842 s -- in com.insurancedoc.InsuranceVerificationTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ insurance-verification-portal ---
+[INFO] Building jar: C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-ci\target\insurance-verification-portal.jar
+[INFO] 
+[INFO] --- spring-boot:3.2.5:repackage (repackage) @ insurance-verification-portal ---
+[INFO] Replacing main artifact C:\ProgramData\Jenkins\.jenkins\workspace\insurance-verification-ci\target\insurance-verification-portal.jar with repackaged fat jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.280 s
+[INFO] Finished at: 2026-10-28T14:15:11+05:30
+[INFO] ------------------------------------------------------------------------
+Archiving artifacts
+Recording test results
+Finished: SUCCESS

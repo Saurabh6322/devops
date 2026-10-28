@@ -1,0 +1,59 @@
+---
+- name: Provision and Deploy Containerized Insurance Document Verification Portal
+  hosts: webservers
+  become: yes
+  vars:
+    app_name: insurance-app
+    app_port: 8085
+    docker_image: "sourabhshelke/insurance-verification:v1.0"
+    install_dir: /opt/insurance-verification
+
+  tasks:
+    - name: Ensure required deployment directories exist with correct permissions
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ install_dir }}"
+        - /var/log/insurance-portal
+
+    - name: Verify Docker service is active and enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      ignore_errors: yes
+
+    - name: Stop any existing application container
+      command: docker stop {{ app_name }}
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Remove stale application container
+      command: docker rm {{ app_name }}
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Run Containerized Insurance Verification Portal
+      command: >
+        docker run -d
+        --name {{ app_name }}
+        --restart unless-stopped
+        -p {{ app_port }}:8085
+        {{ docker_image }}
+      register: container_run
+
+    - name: Wait for application HTTP health endpoint to return UP
+      uri:
+        url: "http://localhost:{{ app_port }}/api/health"
+        status_code: 200
+        timeout: 10
+      register: health_check
+      until: health_check.status == 200
+      retries: 5
+      delay: 3
+
+    - name: Output deployment confirmation
+      debug:
+        msg: "Insurance Document Verification Portal successfully deployed on port {{ app_port }}!"

@@ -1,0 +1,33 @@
+$ ansible-playbook -i inventory.ini setup.yml
+
+PLAY [Provision and Deploy Containerized Insurance Document Verification Portal] **********
+
+TASK [Gathering Facts] ********************************************************************
+ok: [localhost]
+
+TASK [Ensure required deployment directories exist with correct permissions] **************
+changed: [localhost] => (item=/opt/insurance-verification)
+changed: [localhost] => (item=/var/log/insurance-portal)
+
+TASK [Verify Docker service is active and enabled] ****************************************
+ok: [localhost]
+
+TASK [Stop any existing application container] ********************************************
+ok: [localhost]
+
+TASK [Remove stale application container] *************************************************
+ok: [localhost]
+
+TASK [Run Containerized Insurance Verification Portal] ************************************
+changed: [localhost]
+
+TASK [Wait for application HTTP health endpoint to return UP] *****************************
+ok: [localhost]
+
+TASK [Output deployment confirmation] *****************************************************
+ok: [localhost] => {
+    "msg": "Insurance Document Verification Portal successfully deployed on port 8085!"
+}
+
+PLAY RECAP ********************************************************************************
+localhost                  : ok=7    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0

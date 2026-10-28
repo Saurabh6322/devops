@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Document Verification Portal | DevOps Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #e0e7ff;
+            --accent: #06b6d4;
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-card: #1f2937;
+            --surface-hover: #374151;
+            --border: #374151;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.15);
+            --danger-border: rgba(239, 68, 68, 0.4);
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.15);
+            --warning-border: rgba(245, 158, 11, 0.4);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.15);
+            --success-border: rgba(16, 185, 129, 0.4);
+            --info: #3b82f6;
+            --info-bg: rgba(59, 130, 246, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1360px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+        }
+
+        .header-title h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 3px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(79, 70, 229, 0.2);
+            color: #a5b4fc;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            border: 1px solid rgba(79, 70, 229, 0.4);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--surface-hover);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, #0284c7, #06b6d4);
+            color: #ffffff;
+        }
+
+        .btn-accent:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--border);
+        }
+
+        .kpi-card.kpi-primary::before { background: var(--primary); }
+        .kpi-card.kpi-success::before { background: var(--success); }
+        .kpi-card.kpi-warning::before { background: var(--warning); }
+        .kpi-card.kpi-danger::before { background: var(--danger); }
+        .kpi-card.kpi-info::before { background: var(--accent); }
+
+        .kpi-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .kpi-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Alert Notification Banner */
+        .alert-banner {
+            background-color: var(--danger-bg);
+            border: 1px solid var(--danger-border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .alert-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-icon {
+            font-size: 1.4rem;
+        }
+
+        .alert-text h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fca5a5;
+        }
+
+        .alert-text p {
+            font-size: 0.82rem;
+            color: #fecaca;
+            margin-top: 2px;
+        }
+
+        /* Main Workspace Section */
+        .panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            margin-bottom: 24px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 14px 8px 34px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            width: 260px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .filter-select {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+
+        th {
+            background-color: var(--surface-card);
+            color: var(--text-muted);
+            padding: 12px 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Status & Risk Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-verified {
+            background-color: var(--success-bg);
+            color: #34d399;
+            border: 1px solid var(--success-border);
+        }
+
+        .badge-review {
+            background-color: var(--warning-bg);
+            color: #fbbf24;
+            border: 1px solid var(--warning-border);
+        }
+
+        .badge-fraud {
+            background-color: var(--danger-bg);
+            color: #f87171;
+            border: 1px solid var(--danger-border);
+        }
+
+        .badge-submitted {
+            background-color: var(--info-bg);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .badge-rejected {
+            background-color: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+            border: 1px solid #4b5563;
+        }
+
+        .risk-meter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .risk-bar {
+            width: 60px;
+            height: 6px;
+            background: #374151;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .risk-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .risk-low { background-color: var(--success); }
+        .risk-mid { background-color: var(--warning); }
+        .risk-high { background-color: var(--danger); }
+
+        .action-btns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 0.78rem;
+            border-radius: 6px;
+        }
+
+        .btn-verify {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-verify:hover {
+            background-color: var(--success);
+            color: #fff;
+        }
+
+        .btn-flag {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-flag:hover {
+            background-color: var(--danger);
+            color: #fff;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 560px;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--primary-light);
+            text-decoration: none;
+            margin-left: 16px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div class="header-title">
+            <div class="header-logo">🛡️</div>
+            <div>
+                <h1>Insurance Document Verification Portal <span class="header-badge">DevOps MVP v1.0</span></h1>
+                <p>Candidate: <strong>Sourabh Shelke</strong> (Roll No: <strong>23102C0029</strong>) | BE CMPN Capstone</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="fetchData()">🔄 Refresh</button>
+            <button class="btn btn-accent" onclick="runOcrSimulation()">⚡ Run OCR Batch Scan</button>
+            <button class="btn btn-primary" onclick="openSubmitModal()">+ Submit Document</button>
+        </div>
+    </header>
+
+    <!-- KPI Summary Grid -->
+    <div class="kpi-grid">
+        <div class="kpi-card kpi-primary">
+            <span class="kpi-label">Total Documents</span>
+            <div class="kpi-value" id="kpiTotal">0</div>
+            <span class="kpi-sub" id="kpiClaimAmount">Claim Vol: ₹0</span>
+        </div>
+        <div class="kpi-card kpi-success">
+            <span class="kpi-label">Verified Clean</span>
+            <div class="kpi-value" id="kpiVerified">0</div>
+            <span class="kpi-sub">Cleared authenticity threshold</span>
+        </div>
+        <div class="kpi-card kpi-warning">
+            <span class="kpi-label">Under Investigation</span>
+            <div class="kpi-value" id="kpiUnderReview">0</div>
+            <span class="kpi-sub">Awaiting secondary underwriter</span>
+        </div>
+        <div class="kpi-card kpi-danger">
+            <span class="kpi-label">Fraud Suspects</span>
+            <div class="kpi-value" id="kpiFraud">0</div>
+            <span class="kpi-sub">Risk score &ge; 70% threshold</span>
+        </div>
+        <div class="kpi-card kpi-info">
+            <span class="kpi-label">Avg Risk Score</span>
+            <div class="kpi-value" id="kpiAvgRisk">0.0</div>
+            <span class="kpi-sub">Automated OCR heuristic</span>
+        </div>
+    </div>
+
+    <!-- Real-time Alert Banner -->
+    <div class="alert-banner" id="alertBanner" style="display: none;">
+        <div class="alert-banner-content">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-text">
+                <h4 id="alertBannerTitle">Critical Anomaly Alert</h4>
+                <p id="alertBannerText">High fraud risk documents detected requiring immediate investigator intervention.</p>
+            </div>
+        </div>
+        <button class="btn btn-sm btn-flag" onclick="filterByFraud()">View Flagged Records</button>
+    </div>
+
+    <!-- Main Table Panel -->
+    <div class="panel">
+        <div class="panel-header">
+            <div class="panel-title">
+                <span>📑 Verification Records Registry</span>
+            </div>
+            <div class="filter-bar">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search Policy, Claimant, Doc ID..." oninput="handleSearch()">
+                </div>
+                <select id="statusFilter" class="filter-select" onchange="handleFilter()">
+                    <option value="ALL">All Statuses</option>
+                    <option value="SUBMITTED">Submitted</option>
+                    <option value="UNDER_REVIEW">Under Review</option>
+                    <option value="VERIFIED">Verified</option>
+                    <option value="FLAGGED_FRAUD">Flagged Fraud</option>
+                    <option value="REJECTED">Rejected</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document ID</th>
+                        <th>Policy No.</th>
+                        <th>Claimant Name</th>
+                        <th>Document Type</th>
+                        <th>Risk Score</th>
+                        <th>Confidence</th>
+                        <th>Claim (INR)</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="documentsTableBody">
+                    <tr>
+                        <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading verification registry records...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Submit Document Modal -->
+    <div class="modal-overlay" id="submitModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Submit Insurance Document</h3>
+                <button class="close-btn" onclick="closeSubmitModal()">&times;</button>
+            </div>
+            <form id="submitDocForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Policy Number</label>
+                        <input type="text" class="form-control" id="formPolicyNumber" placeholder="e.g. POL-892100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Claimant Full Name</label>
+                        <input type="text" class="form-control" id="formClaimantName" placeholder="e.g. Rajesh Khurana" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Document Category</label>
+                        <select class="form-control" id="formDocType">
+                            <option value="Hospital Invoice">Hospital Invoice</option>
+                            <option value="Surveyor Report">Surveyor Report</option>
+                            <option value="Police FIR">Police FIR</option>
+                            <option value="KYC Identity">KYC Identity</option>
+                            <option value="Damage Estimate">Damage Estimate</option>
+                            <option value="Medical Prescription">Medical Prescription</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Claim Amount (₹)</label>
+                        <input type="number" class="form-control" id="formClaimAmount" placeholder="e.g. 50000" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Initial Risk Assessment (0-100)</label>
+                        <input type="number" class="form-control" id="formRiskScore" min="0" max="100" value="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Authenticity Confidence (%)</label>
+                        <input type="number" step="0.1" class="form-control" id="formConfidence" min="0" max="100" value="95.5" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Reviewer / Intake Notes</label>
+                    <textarea class="form-control" id="formNotes" rows="3" placeholder="Enter intake remarks, digital seal verification notes, etc."></textarea>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeSubmitModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit for Verification</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Review / Details Modal -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Document Verification Details</h3>
+                <button class="close-btn" onclick="closeDetailsModal()">&times;</button>
+            </div>
+            <div id="detailsModalBody">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <span>Containerized Insurance Document Verification Portal &bull; Academic Project 2026-27</span>
+        </div>
+        <div class="footer-links">
+            <span>Student: Sourabh Shelke | Roll: 23102C0029</span>
+            <a href="/api/health" target="_blank">Health Check API</a>
+            <a href="/h2-console" target="_blank">H2 Console</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    let allDocuments = [];
+
+    async function fetchData() {
+        try {
+            const [docsRes, summaryRes, alertsRes] = await Promise.all([
+                fetch('/api/documents'),
+                fetch('/api/summary'),
+                fetch('/api/alerts')
+            ]);
+
+            allDocuments = await docsRes.json();
+            const summary = await summaryRes.json();
+            const alerts = await alertsRes.json();
+
+            updateKPIs(summary);
+            updateAlertBanner(alerts);
+            renderTable(allDocuments);
+        } catch (err) {
+            console.error('Error fetching portal data:', err);
+        }
+    }
+
+    function updateKPIs(s) {
+        document.getElementById('kpiTotal').innerText = s.totalDocuments || 0;
+        document.getElementById('kpiVerified').innerText = s.verifiedCount || 0;
+        document.getElementById('kpiUnderReview').innerText = s.underReviewCount || 0;
+        document.getElementById('kpiFraud').innerText = s.flaggedFraudCount || 0;
+        document.getElementById('kpiAvgRisk').innerText = (s.averageRiskScore || 0).toFixed(1) + '%';
+        document.getElementById('kpiClaimAmount').innerText = 'Claim Vol: ₹' + (s.totalClaimAmount || 0).toLocaleString();
+    }
+
+    function updateAlertBanner(alerts) {
+        const banner = document.getElementById('alertBanner');
+        if (alerts.totalAlerts && alerts.totalAlerts > 0) {
+            banner.style.display = 'flex';
+            document.getElementById('alertBannerTitle').innerText = `${alerts.totalAlerts} High-Risk Suspicious Claim Documents Detected!`;
+            document.getElementById('alertBannerText').innerText = `Automated fraud engine flagged documents with risk score >= 70%. Immediate underwriting review mandated.`;
+        } else {
+            banner.style.display = 'none';
+        }
+    }
+
+    function renderTable(documents) {
+        const tbody = document.getElementById('documentsTableBody');
+        if (!documents || documents.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 30px;">No verification records found matching current criteria.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = documents.map(doc => {
+            const statusClass = getStatusClass(doc.verificationStatus);
+            const riskClass = doc.riskScore < 30 ? 'risk-low' : doc.riskScore < 70 ? 'risk-mid' : 'risk-high';
+
+            return `
+                <tr>
+                    <td><strong>${escapeHtml(doc.documentNumber)}</strong></td>
+                    <td><code>${escapeHtml(doc.policyNumber)}</code></td>
+                    <td>${escapeHtml(doc.claimantName)}</td>
+                    <td>${escapeHtml(doc.documentType)}</td>
+                    <td>
+                        <div class="risk-meter">
+                            <div class="risk-bar">
+                                <div class="risk-bar-fill ${riskClass}" style="width: ${doc.riskScore}%;"></div>
+                            </div>
+                            <span>${doc.riskScore}%</span>
+                        </div>
+                    </td>
+                    <td>${doc.authenticityConfidence}%</td>
+                    <td>₹${(doc.claimAmount || 0).toLocaleString()}</td>
+                    <td><span class="badge ${statusClass}">${escapeHtml(doc.verificationStatus)}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn btn-sm btn-secondary" onclick="viewDetails(${doc.id})">Inspect</button>
+                            <button class="btn btn-sm btn-verify" title="Verify Document" onclick="quickStatus(${doc.id}, 'VERIFIED')">✓</button>
+                            <button class="btn btn-sm btn-flag" title="Flag Fraud" onclick="quickStatus(${doc.id}, 'FLAGGED_FRAUD')">⚑</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function getStatusClass(status) {
+        switch (status) {
+            case 'VERIFIED': return 'badge-verified';
+            case 'UNDER_REVIEW': return 'badge-review';
+            case 'FLAGGED_FRAUD': return 'badge-fraud';
+            case 'SUBMITTED': return 'badge-submitted';
+            case 'REJECTED': return 'badge-rejected';
+            default: return 'badge-submitted';
+        }
+    }
+
+    function handleSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const status = document.getElementById('statusFilter').value;
+        filterAndRender(query, status);
+    }
+
+    function handleFilter() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const status = document.getElementById('statusFilter').value;
+        filterAndRender(query, status);
+    }
+
+    function filterByFraud() {
+        document.getElementById('statusFilter').value = 'FLAGGED_FRAUD';
+        handleFilter();
+    }
+
+    function filterAndRender(query, status) {
+        let filtered = allDocuments;
+        if (status !== 'ALL') {
+            filtered = filtered.filter(d => d.verificationStatus === status);
+        }
+        if (query) {
+            filtered = filtered.filter(d =>
+                d.documentNumber.toLowerCase().includes(query) ||
+                d.policyNumber.toLowerCase().includes(query) ||
+                d.claimantName.toLowerCase().includes(query) ||
+                d.documentType.toLowerCase().includes(query)
+            );
+        }
+        renderTable(filtered);
+    }
+
+    async function quickStatus(id, newStatus) {
+        const notes = newStatus === 'VERIFIED'
+            ? 'Quick manual approval by Underwriting Officer Sourabh Shelke.'
+            : 'Flagged for high fraud suspicion and digital anomaly.';
+
+        try {
+            const res = await fetch(`/api/documents/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus, notes: notes })
+            });
+            if (res.ok) {
+                fetchData();
+            }
+        } catch (err) {
+            console.error('Failed to update status:', err);
+        }
+    }
+
+    async function runOcrSimulation() {
+        try {
+            const res = await fetch('/api/simulate', { method: 'POST' });
+            if (res.ok) {
+                const data = await res.json();
+                fetchData();
+                alert(`⚡ OCR Batch Scan Executed: Evaluated ${data.processedRecords} document records.`);
+            }
+        } catch (err) {
+            console.error('Simulation failed:', err);
+        }
+    }
+
+    function openSubmitModal() {
+        document.getElementById('submitModal').style.display = 'flex';
+    }
+
+    function closeSubmitModal() {
+        document.getElementById('submitModal').style.display = 'none';
+        document.getElementById('submitDocForm').reset();
+    }
+
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+        const payload = {
+            policyNumber: document.getElementById('formPolicyNumber').value,
+            claimantName: document.getElementById('formClaimantName').value,
+            documentType: document.getElementById('formDocType').value,
+            claimAmount: parseFloat(document.getElementById('formClaimAmount').value),
+            riskScore: parseInt(document.getElementById('formRiskScore').value),
+            authenticityConfidence: parseFloat(document.getElementById('formConfidence').value),
+            reviewerNotes: document.getElementById('formNotes').value
+        };
+
+        try {
+            const res = await fetch('/api/documents', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                closeSubmitModal();
+                fetchData();
+            } else {
+                alert('Submission failed. Please verify input fields.');
+            }
+        } catch (err) {
+            console.error('Error submitting document:', err);
+        }
+    }
+
+    function viewDetails(id) {
+        const doc = allDocuments.find(d => d.id === id);
+        if (!doc) return;
+
+        const body = document.getElementById('detailsModalBody');
+        body.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div>
+                    <h4 style="font-size: 1.1rem; color: #fff;">${escapeHtml(doc.documentNumber)}</h4>
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Policy: ${escapeHtml(doc.policyNumber)}</span>
+                </div>
+                <span class="badge ${getStatusClass(doc.verificationStatus)}">${escapeHtml(doc.verificationStatus)}</span>
+            </div>
+
+            <div style="background-color: var(--surface-card); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+                <p><strong>Claimant:</strong> ${escapeHtml(doc.claimantName)}</p>
+                <p><strong>Document Type:</strong> ${escapeHtml(doc.documentType)}</p>
+                <p><strong>Claim Amount:</strong> ₹${(doc.claimAmount || 0).toLocaleString()}</p>
+                <p><strong>Authenticity Confidence:</strong> ${doc.authenticityConfidence}%</p>
+                <p><strong>Risk Score:</strong> ${doc.riskScore}% (${doc.riskScore < 30 ? 'Low Risk' : doc.riskScore < 70 ? 'Moderate' : 'High Fraud Suspicion'})</p>
+                <p><strong>Submission Timestamp:</strong> ${doc.submissionDate ? doc.submissionDate.replace('T', ' ').substring(0, 19) : 'N/A'}</p>
+            </div>
+
+            <div class="form-group">
+                <label>Reviewer Remarks & Audit Notes</label>
+                <textarea id="modalNotesInput" class="form-control" rows="3">${escapeHtml(doc.reviewerNotes || '')}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Update Verification Status</label>
+                <select id="modalStatusSelect" class="form-control">
+                    <option value="SUBMITTED" ${doc.verificationStatus === 'SUBMITTED' ? 'selected' : ''}>SUBMITTED</option>
+                    <option value="UNDER_REVIEW" ${doc.verificationStatus === 'UNDER_REVIEW' ? 'selected' : ''}>UNDER_REVIEW</option>
+                    <option value="VERIFIED" ${doc.verificationStatus === 'VERIFIED' ? 'selected' : ''}>VERIFIED</option>
+                    <option value="FLAGGED_FRAUD" ${doc.verificationStatus === 'FLAGGED_FRAUD' ? 'selected' : ''}>FLAGGED_FRAUD</option>
+                    <option value="REJECTED" ${doc.verificationStatus === 'REJECTED' ? 'selected' : ''}>REJECTED</option>
+                </select>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeDetailsModal()">Close</button>
+                <button class="btn btn-primary" onclick="saveModalStatus(${doc.id})">Save Changes</button>
+            </div>
+        `;
+
+        document.getElementById('detailsModal').style.display = 'flex';
+    }
+
+    async function saveModalStatus(id) {
+        const newStatus = document.getElementById('modalStatusSelect').value;
+        const notes = document.getElementById('modalNotesInput').value;
+
+        try {
+            const res = await fetch(`/api/documents/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus, notes: notes })
+            });
+            if (res.ok) {
+                closeDetailsModal();
+                fetchData();
+            }
+        } catch (err) {
+            console.error('Error saving status:', err);
+        }
+    }
+
+    function closeDetailsModal() {
+        document.getElementById('detailsModal').style.display = 'none';
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Auto-fetch on page load
+    fetchData();
+</script>
+</body>
+</html>

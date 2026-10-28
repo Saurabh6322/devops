@@ -1,0 +1,32 @@
+[Pipeline] Start of Pipeline
+[Pipeline] stage (Docker Build & Tag)
+[Pipeline] echo
+Building versioned Docker image: sourabhshelke/insurance-verification:12...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "docker build -t sourabhshelke/insurance-verification:12 -t sourabhshelke/insurance-verification:latest . && exit %%ERRORLEVEL%%"
+[+] Building 3.8s (7/7) FINISHED
+ => exporting to image
+ => => naming to docker.io/sourabhshelke/insurance-verification:12
+ => => naming to docker.io/sourabhshelke/insurance-verification:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage (Containerized Deployment)
+[Pipeline] echo
+Deploying containerized application on port 8085...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "docker stop insurance-app || exit 0"
+insurance-app
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "docker rm insurance-app || exit 0"
+insurance-app
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "docker run -d -p 8085:8085 --name insurance-app sourabhshelke/insurance-verification:latest && exit %%ERRORLEVEL%%"
+e810a9f2014b98214fa8214cb91284a71029384729104bce9123847192841029
+[Pipeline] echo
+Validating health probe...
+[Pipeline] bat
+[insurance-verification-pipeline] $ cmd.exe /C "curl -s http://localhost:8085/api/health"
+{"status":"UP","application":"Insurance Document Verification Portal","student":"SOURABH SHELKE","rollNo":"23102C0029","version":"1.0.0"}
+[Pipeline] }
+[Pipeline] // stage
+Finished: SUCCESS
