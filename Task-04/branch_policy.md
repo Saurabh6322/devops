@@ -39,3 +39,4 @@ Commits must follow the **Conventional Commits** specification:
 - `docs: <description>` — Documentation updates (e.g., `docs: Add API specification`)
 - `ci: <description>` — Changes to CI/CD files (e.g., `ci: Add Docker packaging stage to Jenkinsfile`)
 - `test: <description>` — Adding or modifying automated tests (e.g., `test: Add CUJ-3 Selenium test case`)
+

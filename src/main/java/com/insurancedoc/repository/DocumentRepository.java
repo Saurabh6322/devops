@@ -18,3 +18,4 @@ public interface DocumentRepository extends JpaRepository<InsuranceDocument, Lon
     List<InsuranceDocument> findByPolicyNumberContainingIgnoreCaseOrClaimantNameContainingIgnoreCase(
             String policyNumber, String claimantName);
 }
+

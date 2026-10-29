@@ -54,3 +54,4 @@
 ### Q6: How does your application prevent insurance fraud?
 > **Answer:**  
 > The portal implements heuristic fraud risk scoring evaluating submission metadata, claim amounts, and document tamper parameters. Any document with a risk score $\ge 70\%$ is automatically quarantined with status `FLAGGED_FRAUD`, triggering high-priority visual alert banners and requiring dedicated investigation by an underwriter before any payment can be authorized.
+

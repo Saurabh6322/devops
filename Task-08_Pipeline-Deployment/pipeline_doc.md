@@ -41,3 +41,4 @@ graph LR
    - Builds container image tagged with `${BUILD_NUMBER}` and `latest`.
 6. **Stage 6: Deploy Application**
    - Stops any stale container instances, launches fresh container mapped to `${APP_PORT}`, and verifies health.
+

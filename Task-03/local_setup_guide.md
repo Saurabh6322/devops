@@ -60,3 +60,4 @@ mvn clean spring-boot:run
 mvn test
 ```
 Reports are automatically generated and saved in `target/surefire-reports/`.
+

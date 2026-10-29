@@ -23,3 +23,4 @@ Before the Insurance Document Verification Portal can run on target production n
 
 ## 🛠️ 2. Ansible Playbook Design
 The configuration is fully codified into an Infrastructure as Code (IaC) Ansible playbook (`setup.yml`) executing against hosts defined in `inventory.ini`.
+

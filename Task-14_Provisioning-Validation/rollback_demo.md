@@ -58,3 +58,4 @@ curl -s http://localhost:8085/api/health
 # Returns status: "UP", version: "1.0.0"
 ```
 **Conclusion:** Service recovery achieved in $< 10$ seconds with zero data loss.
+

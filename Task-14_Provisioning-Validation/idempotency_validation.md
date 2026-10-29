@@ -58,3 +58,4 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=7    changed=0    unreachable=0    failed=0
 ```
 *Result:* **`changed=0`**! The Ansible engine detects that all desired states are already satisfied, proving $100\%$ idempotency.
+

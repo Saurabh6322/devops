@@ -57,3 +57,4 @@ The development and DevOps operationalization of the portal is executed across t
   - Task 14: Clean Target Provisioning, Idempotency Verification (`changed=0`), Health Checks & Rollback
   - Task 15: Final Technical Report, Viva Presentation Guide & Master PDF compilation
 - **Deliverables:** Running Docker container, idempotent Ansible playbook, viva presentation deck.
+

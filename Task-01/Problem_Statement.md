@@ -60,3 +60,4 @@ Git Version Control ──> Jenkins CI/CD ──> Selenium Automated Testing ─
 | **3** | System Availability & Uptime | 95.0% | $99.9\%$ during testing and evaluation |
 | **4** | CI/CD Commit-to-Deploy Time | 1–2 days | $< 3$ minutes via automated pipeline |
 | **5** | Automated Test Pass Rate | Variable / Manual | $100\%$ pass across 5 critical user journeys |
+

@@ -75,3 +75,4 @@ Traditional insurance claim verification relies heavily on manual file inspectio
 ## 6. Limitations & Future Work
 - **Limitations:** Document tampering is evaluated using heuristic simulation rather than live neural OCR engines.
 - **Future Work:** Integrate OCR libraries (Tesseract / AWS Textract) and deploy on Kubernetes cluster using Helm charts.
+

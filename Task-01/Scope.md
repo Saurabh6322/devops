@@ -48,3 +48,4 @@
 - **Simulated OCR Engine:** Document authenticity scores and tamper flags are evaluated using deterministic heuristic scoring rather than third-party proprietary paid OCR cloud APIs.
 - **In-Memory Embedded Storage:** H2 in-memory relational database is utilized to ensure zero external database installation friction on target deployment nodes.
 - **Port Allocation:** Microservice is bound to port `8085` to avoid collisions with standard Jenkins (`8080`) or host development services.
+

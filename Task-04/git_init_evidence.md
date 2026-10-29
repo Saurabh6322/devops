@@ -40,3 +40,4 @@ git branch develop
 - Application code: `src/main/java/com/insurancedoc/...`, `src/main/resources/static/index.html`
 - Automated test suite: `src/test/java/com/insurancedoc/...`
 - Milestones: `Task-01/` to `Task-15_Final-Release-Docs/`
+

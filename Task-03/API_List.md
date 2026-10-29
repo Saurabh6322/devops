@@ -56,3 +56,4 @@ CREATE TABLE insurance_documents (
   "lastUpdated": "2026-10-28T10:05:00"
 }
 ```
+

@@ -179,3 +179,4 @@ public class InsuranceDocument {
         this.lastUpdated = lastUpdated;
     }
 }
+

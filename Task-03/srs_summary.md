@@ -62,3 +62,4 @@ This document specifies the software requirements for the **Containerized Insura
 ### NFR-04: Maintainability & Testability
 - Codebase shall maintain modular separation between Controller, Model, and Repository tiers.
 - Automated tests shall cover at least 5 critical user journeys with $100\%$ pass rates.
+

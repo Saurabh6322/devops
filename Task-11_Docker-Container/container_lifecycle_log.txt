@@ -48,3 +48,4 @@ $ docker rm -f insurance-app
 insurance-app
 
 # Lifecycle test completed successfully with zero container errors.
+

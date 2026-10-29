@@ -48,3 +48,4 @@ stage('Containerized Deployment') {
 - **Automated Versioning:** Every successful build automatically generates a numbered container tag (`${BUILD_NUMBER}`) ensuring immutable artifact traceability.
 - **Rollback Readiness:** If a newer container instance experiences runtime errors, rolling back requires only re-launching the preceding build number image.
 - **Environment Isolation:** Container guarantees identical execution across developer laptops, Jenkins agents, and cloud servers.
+

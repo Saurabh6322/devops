@@ -47,3 +47,4 @@ git push origin feature/document-intake
 * 3b19e42 (HEAD -> feature/document-intake) feat(intake): Implement document intake modal and POST /api/documents endpoint
 * 8f4a102 (develop, main) feat: Initial commit with Spring Boot skeleton, Maven pom.xml, and DevOps documentation
 ```
+

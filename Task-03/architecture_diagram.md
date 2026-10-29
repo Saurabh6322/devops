@@ -48,3 +48,4 @@ flowchart TD
 2. **Stateless REST Services:** The Spring Boot backend exposes stateless REST endpoints allowing seamless horizontal scaling inside container clusters.
 3. **Embedded Relational Persistence:** Embedded H2 database ensures lightning-fast boot times, zero external setup friction, and high operational reliability during automated tests.
 4. **Isolated Microservice Containerization:** The application compiles into an executable fat JAR packaged into a lightweight Alpine Linux Docker container.
+

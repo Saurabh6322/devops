@@ -24,3 +24,4 @@
 - [x] High-risk records (`DOC-2026-1003` and `DOC-2026-1006`) trigger the top alert banner.
 - [x] Modal popup displays full metadata and accepts underwriter status changes.
 - [x] Batch simulation button triggers animated score recalculation.
+

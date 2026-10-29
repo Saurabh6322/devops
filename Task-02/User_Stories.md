@@ -75,3 +75,4 @@
 - Clicking "⚡ Run OCR Batch Scan" sends a `POST /api/simulate` request.
 - The system recalculates risk scores, updates confidence percentages, and adjusts status flags dynamically.
 - The UI triggers an immediate refresh reflecting modified KPI numbers.
+

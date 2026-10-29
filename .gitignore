@@ -45,3 +45,7 @@ chetan-ref/
 # Operating System Files
 .DS_Store
 Thumbs.db
+
+
+__pycache__/
+*.pyc

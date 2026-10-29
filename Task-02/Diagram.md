@@ -46,3 +46,4 @@ flowchart LR
 2. **Continuous Integration (CI):** Jenkins detects commits via SCM polling. It compiles the Java application and runs automated unit and integration tests. If tests fail, the quality gate immediately stops the pipeline.
 3. **Continuous Delivery (CD) & Containerization:** Jenkins packages the verified code into a Spring Boot fat JAR, creates a Docker image tagged with the build number, and publishes it to the registry.
 4. **Configuration Management & Provisioning:** Ansible provisions the target server environment, verifies prerequisites, deploys the container, and verifies health via HTTP endpoints.
+
